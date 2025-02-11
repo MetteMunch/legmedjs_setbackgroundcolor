@@ -19,14 +19,18 @@ console.log(autoColor)
 const inpColorPicker = document.getElementById("inpColorPicker")
 console.log(inpColorPicker)
 
-const fontButton = document.querySelector(".increaseFont")
-console.log(fontButton)
+const fontButtonIncrease = document.querySelector(".increaseFont")
+console.log(fontButtonIncrease)
+
+const fontButtonDecrease = document.querySelector(".decreaseFont")
+console.log(fontButtonDecrease)
+
 
 //Her laver jeg en variabel indeholdende alle pTags fra html
 const pTags = document.getElementsByTagName("p")
 console.log(pTags)
 
-//Her ændrer jeg pTags til at være i et Array, så det åbner op for nogle funktionelle funktioner (ForEach)
+//Her ændrer jeg pTags til at være i et Array, så det åbner op for nogle funktionelle funktionsmuligheder (ForEach)
 const pArray = Array.from(pTags)
 console.log(pArray)
 
@@ -46,27 +50,36 @@ function setBackgroundColorWithPicker() {
     bdy.style.backgroundColor = color
 }
 
-function changePTags(element) {
-    pArray.forEach(element)
+function increaseFont() {
+    pArray.forEach(p => {
+            let oprStyles = window.getComputedStyle(p); // gemmer alle styles fra elementet
+            let oprFontSize = parseInt(oprStyles.fontSize); // finder fontsize og Konverter til tal
+            console.log("Original font size:", oprFontSize);
+            p.style.fontSize = (oprFontSize + 5) + "px"  // Øger fontstørrelsen med 5px
+            console.log("New font size:", p.style.fontSize);
+        }
+    )
 }
 
-function increaseFont(element) {
-    let computedStyle = window.getComputedStyle(element);
-    let fontSize = parseInt(computedStyle.fontSize); // Konverter til tal
-    console.log("Original font size:", fontSize);
-
-    element.style.fontSize = (fontSize + 5) + "px"; // Øger fontstørrelsen med 5px
-    console.log("New font size:", element.style.fontSize);
+function decreaseFont() {
+    pArray.forEach(p => {
+            let oprStyles = window.getComputedStyle(p);
+            let oprFontSize = parseInt(oprStyles.fontSize); // Konverter til tal
+            console.log("Original font size:", oprFontSize);
+            p.style.fontSize = (oprFontSize - 5) + "px"  // formindsker fontstørrelsen med 5px
+            console.log("New font size:", p.style.fontSize);
+        }
+    )
 }
 
 
-
-//Nedenstående angiver hvilken "event" der skal trigge/starte metoden
+//Nedenstående angiver hvilken "event" der skal trigge/starte metoderne
 
 pbCol.addEventListener("click", setBackgroundColorWithButton)
 autoColor.addEventListener("keyup", setBackgroundColorAuto)
-inpColorPicker.addEventListener("input",setBackgroundColorWithPicker)
-fontButton.addEventListener("click",changePTags(increaseFont()))
+inpColorPicker.addEventListener("input", setBackgroundColorWithPicker)
+fontButtonIncrease.addEventListener("click", increaseFont)
+fontButtonDecrease.addEventListener("click", decreaseFont)
 
 
 
