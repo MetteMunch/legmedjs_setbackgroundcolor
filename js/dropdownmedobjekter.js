@@ -26,8 +26,11 @@ function fillDropdown3(item) {
 function setBackgroundColorWithDD3(ev) {
     console.log(ev);
     const selectedIndex = ddColor3.selectedIndex;
+    console.log(selectedIndex)
     const selectedOption = ddColor3.options[selectedIndex];
+    console.log(selectedOption)
     const color = selectedOption.value;
+    console.log(color)
     bdy.style.backgroundColor = color;
 }
 
